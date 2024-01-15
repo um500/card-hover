@@ -1,0 +1,383 @@
+/* author: https://codepen.io/noirsociety/pen/ZEwLGXB
+noirsociety
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  
+  main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  }
+  
+  .item {
+    width: 200px;
+    height: 300px;
+    list-style-type: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background-position: center;
+    background-size: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 30px rgba(255,255,255,0.3) inset;
+    transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
+  
+    &:nth-child(1), &:nth-child(2) {
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transform: none;
+      border-radius: 0;
+      box-shadow: none;
+      opacity: 1;
+    }
+  
+    &:nth-child(3) { left: 50%; }
+    &:nth-child(4) { left: calc(50% + 220px); }
+    &:nth-child(5) { left: calc(50% + 440px); }
+    &:nth-child(6) { left: calc(50% + 660px); opacity: 0; }
+  }
+  
+  .content {
+    width: min(30vw,400px);
+    position: absolute;
+    top: 50%;
+    left: 3rem;
+    transform: translateY(-50%);
+    font: 400 0.85rem helvetica,sans-serif;
+    color: white;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+    opacity: 0;
+    display: none;
+  
+    & .title {
+      font-family: 'arial-black';
+      text-transform: uppercase;
+    }
+  
+    & .description {
+      line-height: 1.7;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.8rem;
+    }
+  
+    & button {
+      width: fit-content;
+      background-color: rgba(0,0,0,0.1);
+      color: white;
+      border: 2px solid white;
+      border-radius: 0.25rem;
+      padding: 0.75rem;
+      cursor: pointer;
+    }
+  }
+  
+  .item:nth-of-type(2) .content {
+    display: block;
+    animation: show 0.75s ease-in-out 0.3s forwards;
+  }
+  
+  @keyframes show {
+    0% {
+      filter: blur(5px);
+      transform: translateY(calc(-50% + 75px));
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+  
+  .nav {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    user-select: none;
+  
+    & .btn {
+      background-color: rgba(255,255,255,0.5);
+      color: rgba(0,0,0,0.7);
+      border: 2px solid rgba(0,0,0,0.6);
+      margin: 0 0.25rem;
+      padding: 0.75rem;
+      border-radius: 50%;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: rgba(255,255,255,0.3);
+      }
+    }
+  }
+  
+  @media (width > 650px) and (width < 900px) {
+    .content {
+      & .title        { font-size: 1rem; }
+      & .description  { font-size: 0.7rem; }
+      & button        { font-size: 0.7rem; }
+    }
+    .item {
+      width: 160px;
+      height: 270px;
+  
+      &:nth-child(3) { left: 50%; }
+      &:nth-child(4) { left: calc(50% + 170px); }
+      &:nth-child(5) { left: calc(50% + 340px); }
+      &:nth-child(6) { left: calc(50% + 510px); opacity: 0; }
+    }
+  }
+  
+  @media (width < 650px) {
+    .content {
+      & .title        { font-size: 0.9rem; }
+      & .description  { font-size: 0.65rem; }
+      & button        { font-size: 0.7rem; }
+    }
+    .item {
+      width: 130px;
+      height: 220px;
+  
+      &:nth-child(3) { left: 50%; }
+      &:nth-child(4) { left: calc(50% + 140px); }
+      &:nth-child(5) { left: calc(50% + 280px); }
+      &:nth-child(6) { left: calc(50% + 420px); opacity: 0; }
+    }
+  }
+
+  @import url("https://fonts.googleapis.com/css?family=Raleway");
+
+:root {
+  --glow-color: hsl(186 100% 69%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+
+.glowing-btn {
+  position: relative;
+  color: var(--glow-color);
+  cursor: pointer;
+  padding: 0.35em 1em;
+  border: 0.15em solid var(--glow-color);
+  border-radius: 0.45em;
+  background: none;
+  perspective: 2em;
+  font-family: "Raleway", sans-serif;
+  font-size: 2em;
+  font-weight: 900;
+  letter-spacing: 1em;
+
+  -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  -moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  animation: border-flicker 2s linear infinite;
+}
+
+.glowing-txt {
+  float: left;
+  margin-right: -0.8em;
+  -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+    0 0 0.45em var(--glow-color);
+  -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+    0 0 0.45em var(--glow-color);
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
+  animation: text-flicker 3s linear infinite;
+}
+
+.faulty-letter {
+  opacity: 0.5;
+  animation: faulty-flicker 2s linear infinite;
+}
+
+.glowing-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.7;
+  filter: blur(1em);
+  transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
+  background: var(--glow-color);
+  pointer-events: none;
+}
+
+.glowing-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  z-index: -1;
+  background-color: var(--glow-color);
+  box-shadow: 0 0 2em 0.2em var(--glow-color);
+  transition: opacity 100ms linear;
+}
+
+.glowing-btn:hover {
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: none;
+  animation: none;
+}
+
+.glowing-btn:hover .glowing-txt {
+  animation: none;
+}
+
+.glowing-btn:hover .faulty-letter {
+  animation: none;
+  text-shadow: none;
+  opacity: 1;
+}
+
+.glowing-btn:hover:before {
+  filter: blur(1.5em);
+  opacity: 1;
+}
+
+.glowing-btn:hover:after {
+  opacity: 1;
+}
+
+@keyframes faulty-flicker {
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 0.1;
+  }
+  4% {
+    opacity: 0.5;
+  }
+  19% {
+    opacity: 0.5;
+  }
+  21% {
+    opacity: 0.1;
+  }
+  23% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  83% {
+    opacity: 0.4;
+  }
+
+  87% {
+    opacity: 1;
+  }
+}
+
+@keyframes text-flicker {
+  0% {
+    opacity: 0.1;
+  }
+
+  2% {
+    opacity: 1;
+  }
+
+  8% {
+    opacity: 0.1;
+  }
+
+  9% {
+    opacity: 1;
+  }
+
+  12% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.7;
+  }
+  72% {
+    opacity: 0.2;
+  }
+
+  77% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes border-flicker {
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 1;
+  }
+  4% {
+    opacity: 0.1;
+  }
+
+  8% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .glowing-btn{
+    font-size: 1em;
+  }
+}
